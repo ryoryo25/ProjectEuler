@@ -6,15 +6,14 @@ def main
 	ans = 0
 	
 	result = Benchmark.realtime do
-		# # need until sqrt(n)
-		# primes = sieve1(Math.sqrt(n).to_i)
+		# need until sqrt(n)
+		primes = sieve1(Math.sqrt(n).to_i)
 
-		# primes.each do |i|
-		# 	if n % i == 0
-		# 		ans = i
-		# 	end
-		# end
-		largestPrimeFactorImproved
+		primes.each do |i|
+			if n % i == 0
+				ans = i
+			end
+		end
 	end
 	
 	puts ans
