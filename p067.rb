@@ -1,3 +1,5 @@
+# reffered: https://www.mathblog.dk/project-euler-18/
+
 def readFile
 	tri = []
 	File.open("files/p067_triangle.txt") do |f|
@@ -16,13 +18,14 @@ end
 
 def main
 	tri = readFile
-	puts(move(tri, 0, 0))
+	find(tri)
+	puts(tri[0][0])
 end
 
-def move(tri, r, c)
-	if tri[r+1] == nil
-		return tri[r][c]
-	else
-		return tri[r][c] + [move(tri, r+1, c), move(tri, r+1, c+1)].max
+def find(tri)
+	(tri.length-2).step(0, -1) do |i|# from bottom row +1
+		0.step(i) do |j|
+			tri[i][j] += [tri[i+1][j], tri[i+1][j+1]].max
+		end
 	end
 end
