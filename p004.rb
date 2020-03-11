@@ -1,20 +1,16 @@
 def main
-	products = []
-	palindromes = []
+	max = 0
 
 	100.step(999) do |i|
 		100.step(999) do |j|
-			products.push(i * j)
+			x = i * j
+			if isPalindrome(x) && max < x
+				max = x
+			end
 		end
 	end
 
-	products.each do |x|
-		if isPalindrome(x)
-			palindromes.push(x)
-		end
-	end
-
-	puts(palindromes.max)
+	puts(max)
 end
 
 def isPalindrome(n)
