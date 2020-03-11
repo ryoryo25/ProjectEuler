@@ -1,3 +1,5 @@
+# reffered(dynamic programming): https://www.mathblog.dk/project-euler-18/
+
 $tri = [
 	[75],
 	[95, 64],
@@ -18,12 +20,24 @@ $tri = [
 
 def main
 	puts(move(0, 0))
+
+	dynamicProgramming
+	puts($tri[0][0])
 end
 
+# recursive
 def move(r, c)
 	if $tri[r+1] == nil
 		return $tri[r][c]
 	else
 		return $tri[r][c] + [move(r+1, c), move(r+1, c+1)].max
+	end
+end
+
+def dynamicProgramming
+	($tri.length-2).step(0, -1) do |i|# from bottom row +1
+		0.step(i) do |j|
+			$tri[i][j] += [$tri[i+1][j], $tri[i+1][j+1]].max
+		end
 	end
 end
