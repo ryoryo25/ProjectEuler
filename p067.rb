@@ -1,4 +1,5 @@
 # reffered: https://www.mathblog.dk/project-euler-18/
+# see also: http://kogecoo.hatenablog.com/entry/20090324/1237903588
 
 def readFile
 	tri = []
