@@ -2,6 +2,7 @@ $d = []
 
 def main
 	gen
+
 	x = 1
 	7.times do |i|
 		x *= $d[10**i - 1]
@@ -11,7 +12,6 @@ def main
 end
 
 def gen
-	# a = []
 	n = 1
 	while $d.length < 10**6 + 100
 		s = n.to_s
