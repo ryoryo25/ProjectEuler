@@ -7,12 +7,15 @@ def main
 end
 
 def count(coins, target)
-	if coins.length == 1
+	if target == 0 # if the recursion reaches this block, 
+		return 1
+	elsif coins.length == 1 # if the recursion reaches this block, 
 		return 1
 	else
 		count = 0
 		coin = coins.pop
-		cycle = (target / coin) + 1
+		cycle = (target / coin) + 1 # to include not using the coin, add 1
+		
 		cycle.times do |i|
 			count += count(coins.dup, target - coin * i)
 		end
