@@ -1,41 +1,30 @@
 def main
-	pnums = Array.new(10**5) {|i| p(i+1) }
-
 	min = 0
-	(10**5 - 1).times do |i|
-		sum = pnums[i]+pnums[i+1]
-		dif = (pnums[i]-pnums[i+1]).abs
-
-		if pnums.include?(sum) && pnums.include?(dif)
-			if min == 0 || min > dif
-				min = dif
+	n = 1
+	while true
+		10.times do |i|
+			sum = p(n+i+1) + p(n)
+			dif = p(n+i+1) - p(n)
+			if isP(sum) && isP(dif)
+				return dif
 			end
 		end
+
+		if n > 10000000
+			return "end"
+		end
+		
+		n += 1
 	end
-	# (10**4 - 2).times do |i|
-	# 	sum = pnums[i]+pnums[i+2]
-	# 	dif = (pnums[i]-pnums[i+2]).abs
-
-	# 	if pnums.include?(sum) && pnums.include?(dif)
-	# 		if min == 0 || min > dif
-	# 			min = dif
-	# 		end
-	# 	end
-	# end
-	# (10**4 - 3).times do |i|
-	# 	sum = pnums[i]+pnums[i+3]
-	# 	dif = (pnums[i]-pnums[i+3]).abs
-
-	# 	if pnums.include?(sum) && pnums.include?(dif)
-	# 		if min == 0 || min > dif
-	# 			min = dif
-	# 		end
-	# 	end
-	# end
 
 	return min
 end
 
 def p(n)
 	return n * (3*n - 1) / 2
+end
+
+def isP(pn)
+	n = (Math.sqrt(24*pn+1)+1) / 6
+	return n == n.to_i.to_f
 end
