@@ -12,20 +12,23 @@ def main
 	puts(max)
 end
 
+# 1 / n = (10 / n) / 10
+# simulate operation of 筆算
 def lenCycle(n)
-	appeared_digits = []
-	s = format("%.1000f", 1.0/n)
+	dividen = 1
+	divisor = n
+	appeared_dividen = []
+	len = 0
 
-	s[2..-1].each_char do |c|
-		d = c.to_i
-		# p appeared_digits
-		if d != 0 && appeared_digits.include?(d)
-			start = appeared_digits.index(d)
-			return appeared_digits[start..-1].length
-		else
-			appeared_digits.push(d)
-		end
+	while !appeared_dividen.include?(dividen)
+		appeared_dividen.push(dividen)
+		dividen *= 10
+		dividen = dividen % divisor
 	end
 
-	return 0
+	if dividen != 0
+		len = appeared_dividen.size-appeared_dividen.find_index(dividen)
+	end
+
+	return len
 end
