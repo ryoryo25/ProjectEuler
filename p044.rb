@@ -1,23 +1,19 @@
 def main
-	min = 0
-	n = 1
+	j = 1
 	while true
-		10.times do |i|
-			sum = p(n+i+1) + p(n)
-			dif = p(n+i+1) - p(n)
-			if isP(sum) && isP(dif)
-				return dif
+		k = 1
+		while k < j
+			dif = (p(j) - p(k)).abs
+			if isP(dif)
+				sum = p(j) + p(k)
+				if isP(sum)
+					return dif
+				end
 			end
+			k += 1
 		end
-
-		if n > 10000000
-			return "end"
-		end
-		
-		n += 1
+		j += 1
 	end
-
-	return min
 end
 
 def p(n)
