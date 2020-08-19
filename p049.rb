@@ -1,49 +1,49 @@
 require './libs/prime.rb'
 
 def main
-	primes = sieve(10**5 - 1)
-	fourdigits = primes.select {|p| p.to_s.length == 4 }
-
-	len = fourdigits.length
+	primes = sieve(10000)
+	fourdigits = primes.select {|p| p > 1000 }
+	fourdigits2 = fourdigits.dup
 	perms = []
-	len.times do |i|
-		x = fourdigits[i]
-		if x != nil
-			pandigitals = [x]
-			px = x.to_s.split(//).sort
-			fourdigits[i] = nil
-			len.times do |j|
-				y = fourdigits[j]
-				if y != nil && y.to_s.split(//).sort == px
-					pandigitals.push(y)
-					fourdigits[j] = nil
-				end
+
+	fourdigits.each do |x|
+		perm = []
+		fourdigits2.each do |y|
+			if isPerm(x, y)
+				perm.push(y)
+				fourdigits2.delete(y)
 			end
-			perms.push(pandigitals)
+		end
+		if perm.size > 2
+			perms.push(perm)
 		end
 	end
-
-	c = perms.select {|x| x.length > 2}
+	
 	ans = []
-	c.each do |p|
-		plen = p.length
-		difs = []
-		flg = false
-		(plen-2).times do |i|
-			i.step(plen-2) do |j|
-				dif = p[j+1]-p[j]
-				if !difs.include?(dif)
-					difs.push(dif)
-				else
-					flg = true
+	perms.each do |perm|
+		perm.each do |a1|
+			perm.each do |a2|
+				if a2 > a1 && perm.include?(2 * a2 - a1)
+				# a3 = a1 + 2d = a1+d + (a1+d - a1) = a2 + (a2 - a1) = 2*a2 - a1
+					ans.push([a1, a2, 2 * a2 - a1])
 				end
 			end
 		end
-
-		if flg
-			ans.push(p)
-		end
 	end
 
-	return ans.length
+	ans.each do |a|
+		answer = ""
+		a.each do |i|
+			answer += i.to_s
+		end
+		puts answer
+	end
+end
+
+def isPerm(n, m)
+	if n.to_s.length != m.to_s.length
+		return false
+	end
+
+	return n.to_s.split(//).sort == m.to_s.split(//).sort
 end
