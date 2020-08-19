@@ -2,7 +2,6 @@ def isPrime(n)
 	if n <= 1
 		return false
 	end
-
 	if n == 2
 		return true
 	end
@@ -20,6 +19,7 @@ def isPrime(n)
 	return true
 end
 
+# get all primes < n
 def sieve(n)
 	primes = []
 	a = Array.new(n, true)
